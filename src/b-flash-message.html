@@ -1,9 +1,59 @@
 <element name="b-flash-message">
     <style>
-        
+        .b-flash-message {
+        	padding: 15px;
+			margin-bottom: 20px;
+			border: 1px solid transparent;
+			border-radius: 4px;
+        }
+
+        .b-flash-message .success {
+			background-color: #dff0d8;
+			border-color: #d6e9c6;
+			color: #3c763d;
+        }
+
+        .b-flash-message .info {
+        	background-color: #d9edf7;
+			border-color: #bce8f1;
+			color: #31708f;        
+		}
+
+        .b-flash-message .warning {
+        	background-color: #fcf8e3;
+			border-color: #faebcc;
+			color: #8a6d3b;
+        }
+
+        .b-flash-message .error {
+        	background-color: #f2dede;
+			border-color: #ebccd1;
+			color: #a94442;
+        }
+
+        .b-flash-message .alert-dismissable{
+        	padding-right: 35px;
+        }
+
+        .b-flash-message .alert-dismissable .close{
+        	position: relative;
+			top: -2px;
+			right: -21px;
+			color: inherit;
+			float:right;
+			font-size:21px;
+			font-weight:700;
+			line-height:1;
+			color:#000;
+			text-shadow:0 1px 0 #fff;
+			opacity:.2;
+			filter:alpha(opacity=20);
+        }
     </style>
     <template>
-        
+        <div class="b-flash-message">
+            <content></content>
+        </div>
     </template>
     <script>
         ({
