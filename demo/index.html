@@ -9,8 +9,17 @@
     <link href="css/b-flash-message.css" rel="stylesheet">
 </head>
 <body>
-    
+	<button id="show-flash-message">Show flash message</button>
+	
+    <b-flash-message type="success">
+        <strong>Hello World !</strong>
+        Foo Bar
+    </b-flash-message >
+
     <script type="text/javascript">
-        
+        var showFlashMessageButton = document.getElementById('show-flash-message');
+        showFlashMessageButton.addEventListener('click', function() {
+            document.querySelector('b-flash-message').show();
+        }, false); 
     </script>
 </body>
