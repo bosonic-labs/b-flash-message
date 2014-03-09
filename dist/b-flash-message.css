@@ -1,5 +1,4 @@
-<element name="b-flash-message">
-    <style>
+
         b-flash-message {
             display: none;
             padding: 15px;
@@ -54,35 +53,4 @@
         b-flash-message[visible] {
             display: block;
         }
-    </style>
-    <template>
-        <div class="b-flash-message alert-closeable">
-        	<button type="button" class="close">×</button>
-            <content></content>
-        </div>
-    </template>
-    <script>
-        ({
-            readyCallback: function() {
-                this.appendChild(this.template.content.cloneNode(true));
-
-                var isCloseable = this.getAttribute('closeable') !== "false";
-                var closeButton = this.querySelector('button.close');
-
-                if(isCloseable) {
-                    closeButton.addEventListener('click', this.close.bind(this));
-                }
-                else {
-                    closeButton.remove();
-                }
-            },
-            show: function() {
-                this.setAttribute('visible', '');
-                this.classList.add(this.getAttribute('type'));
-            },
-            close: function() {
-                this.removeAttribute('visible');
-            }
-        });
-    </script>
-</element>
+    
