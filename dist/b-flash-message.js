@@ -5,9 +5,10 @@
         'b-flash-message',
         {
     readyCallback: function () {
-        this.appendChild(this.template.content.cloneNode(true));
+        var root = this.createShadowRoot();
+        root.appendChild(this.template.content.cloneNode(true));
         var isCloseable = this.getAttribute('closeable') !== 'false';
-        var closeButton = this.querySelector('button.close');
+        var closeButton = root.querySelector('button.close');
         if (isCloseable) {
             closeButton.addEventListener('click', this.close.bind(this));
         } else {

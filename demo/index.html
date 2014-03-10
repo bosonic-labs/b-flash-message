@@ -10,11 +10,18 @@
 </head>
 <body>
     <div>
+        <button id="show-info-flash-message">Show info flash message</button>
+
+        <b-flash-message type="info" closeable="true">
+            <strong>Hello, World!</strong> Foo Bar
+        </b-flash-message >
+    </div>
+
+    <div>
         <button id="show-success-flash-message">Show success flash message</button>
 
         <b-flash-message type="success" closeable="true">
-            <strong>Hello World !</strong>
-            Foo Bar
+            <strong>Congrats!</strong> Foo Bar
         </b-flash-message >
     </div>
 
@@ -22,8 +29,7 @@
         <button id="show-warning-flash-message">Show warning flash message</button>
 
         <b-flash-message type="warning" closeable="true">
-            <strong>Hello World !</strong>
-            Oups Bar
+            <strong>Oups!</strong> Foo Bar
         </b-flash-message >
     </div>
 
@@ -31,12 +37,15 @@
         <button id="show-error-flash-message">Show error flash message</button>
 
         <b-flash-message type="error" closeable="true">
-            <strong>Hello World !</strong>
-            Fail Bar
+            <strong>Fail!</strong> Foo Bar
         </b-flash-message >
     </div>
 
     <script type="text/javascript">
+        var showInfoFlashMessageButton = document.getElementById('show-info-flash-message');
+        showInfoFlashMessageButton.addEventListener('click', function() {
+            document.querySelector('b-flash-message[type=info]').show();
+        }, false);
         var showSuccessFlashMessageButton = document.getElementById('show-success-flash-message');
         showSuccessFlashMessageButton.addEventListener('click', function() {
             document.querySelector('b-flash-message[type=success]').show();
