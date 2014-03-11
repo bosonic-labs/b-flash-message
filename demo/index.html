@@ -10,9 +10,9 @@
 </head>
 <body>
     <div>
-        <button id="show-info-flash-message">Show info flash message</button>
+        <button id="show-info-flash-message">Show info flash message with a duration of 2000 MS</button>
 
-        <b-flash-message type="info" closeable="true">
+        <b-flash-message type="info" closeable="true" duration="2000">
             <strong>Hello, World!</strong> Foo Bar
         </b-flash-message >
     </div>
@@ -46,14 +46,17 @@
         showInfoFlashMessageButton.addEventListener('click', function() {
             document.querySelector('b-flash-message[type=info]').show();
         }, false);
+
         var showSuccessFlashMessageButton = document.getElementById('show-success-flash-message');
         showSuccessFlashMessageButton.addEventListener('click', function() {
             document.querySelector('b-flash-message[type=success]').show();
         }, false);
+
         var showWarningFlashMessageButton = document.getElementById('show-warning-flash-message');
         showWarningFlashMessageButton.addEventListener('click', function() {
             document.querySelector('b-flash-message[type=warning]').show();
         }, false);
+        
         var showErrorFlashMessageButton = document.getElementById('show-error-flash-message');
         showErrorFlashMessageButton.addEventListener('click', function() {
             document.querySelector('b-flash-message[type=error]').show();

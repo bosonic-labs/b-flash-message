@@ -70,16 +70,21 @@
                 var isCloseable = this.getAttribute('closeable') !== "false";
                 var closeButton = root.querySelector('button.close');
 
-                if(isCloseable) {
+                if(isCloseable)
                     closeButton.addEventListener('click', this.close.bind(this));
-                }
-                else {
+                else 
                     closeButton.remove();
-                }
+                
             },
             show: function() {
                 this.setAttribute('visible', '');
                 this.classList.add(this.getAttribute('type'));
+
+                var duration = this.getAttribute('duration');
+
+                if(duration && !isNaN(parseInt(duration)))
+                    setTimeout(this.close.bind(this), duration);
+                
             },
             close: function() {
                 this.removeAttribute('visible');
