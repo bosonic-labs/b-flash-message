@@ -1,4 +1,4 @@
-# b-flash-message
+# &lt;b-flash-message&gt;
 
 ## Overview
 A flash message to display information with different levels.
