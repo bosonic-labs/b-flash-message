@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "bosonic-test-tools": "*",
-    "grunt-bosonic": "^0.3.1"
+    "grunt-bosonic": "*"
   },
   "dependencies": {
     "bosonic": "*"

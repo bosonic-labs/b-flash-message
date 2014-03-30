@@ -25,7 +25,7 @@ A boolean attribute that adds (or not) a button to let the user closes the flash
 
 ### ___type___
 
-Lets you apply a theme to flash message. Four values ​​are possible: `info`, `success`, `warning` and `error`, respectively blue, green, yellow and red. By default this attribute is set to `info`.
+Lets you apply a theme to flash message. Four values are possible: `info`, `success`, `warning` and `error`, respectively blue, green, yellow and red. By default this attribute is set to `info`.
 
 ### ___duration___
 

@@ -62,11 +62,7 @@
         var messages = document.querySelectorAll('b-flash-message');
         for (var i = 0 ; i < messages.length ; i++) {
             messages.item(i).addEventListener('show', function(e) {
-                var eventMsg = " (event triggered)";
-                e.srcElement.innerHTML += eventMsg;
-                setTimeout(function() {
-                    e.srcElement.innerHTML = e.srcElement.innerHTML.replace(eventMsg, "");
-                }, 1000);
+                console.log('event `show` triggered: ', e);
             });
         }
     </script>
