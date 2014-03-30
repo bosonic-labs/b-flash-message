@@ -36,7 +36,7 @@ describe("b-flash-message", function() {
         }, 10);
     });
 
-    it("should be stylized by type", function() {
+    it("should be stylized by type with info by default", function() {
         var flashMessage = document.createElement('b-flash-message');
         expect(flashMessage.getAttribute('type')).to.equal('info');
         // expect(flashMessage.style.backgroundColor).to.equal('#d9edf7');

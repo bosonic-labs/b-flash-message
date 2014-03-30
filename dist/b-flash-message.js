@@ -21,9 +21,11 @@
             var duration = this.getAttribute('duration');
             if (duration && !isNaN(parseInt(duration)))
                 setTimeout(this.close.bind(this), duration);
+            this.dispatchEvent(new Event('show'));
         },
         close: function () {
             this.removeAttribute('visible');
+            this.dispatchEvent(new Event('close'));
         },
         template: ' <div class="b-flash-message alert-closeable"> <button type="button" class="close">\xD7</button> <content></content> </div> '
     });
