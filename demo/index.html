@@ -9,57 +9,54 @@
     <link href="css/b-flash-message.css" rel="stylesheet">
 </head>
 <body>
-    <div>
-        <button id="show-info-flash-message">Show info flash message with a duration of 2000 MS</button>
 
-        <b-flash-message type="info" closeable="true" duration="2000">
+    <b-flash-message visible="true" duration="5000">
+        <h1><strong>It's working!</strong></h1><p>Well done.</p>
+    </b-flash-message>
+
+    <h1>b-flash-message</h1>
+    <div>
+        <p>Display an info message that automatically disappears after 2 secs: <a href="#" id="show-message">show message</a></p>
+        <b-flash-message id="myMessage" type="info" closeable="true" duration="2000">
             <strong>Hello, World!</strong> Foo Bar
-        </b-flash-message >
+        </b-flash-message>
     </div>
 
     <div>
-        <button id="show-success-flash-message">Show success flash message</button>
+        <p>Different levels of flash message are available: (<a href="#" id="reload">reload</a>)</p>
+        <div class="flash-messages">
+            <b-flash-message type="success" closeable="true" visible="true">
+                <strong>Congrats!</strong> Foo Bar
+            </b-flash-message>
 
-        <b-flash-message type="success" closeable="true">
-            <strong>Congrats!</strong> Foo Bar
-        </b-flash-message >
-    </div>
+            <b-flash-message type="info" closeable="true" visible="true">
+                <strong>Good to know!</strong> Foo Bar
+            </b-flash-message>
 
-    <div>
-        <button id="show-warning-flash-message">Show warning flash message</button>
+            <b-flash-message type="warning" closeable="true" visible="true">
+                <strong>Oups!</strong> Foo Bar
+            </b-flash-message>
 
-        <b-flash-message type="warning" closeable="true">
-            <strong>Oups!</strong> Foo Bar
-        </b-flash-message >
-    </div>
-
-    <div>
-        <button id="show-error-flash-message">Show error flash message</button>
-
-        <b-flash-message type="error" closeable="true">
-            <strong>Fail!</strong> Foo Bar
-        </b-flash-message >
+            <b-flash-message type="error" closeable="true" visible="true">
+                <strong>Fail!</strong> Foo Bar
+            </b-flash-message>
+        </div>
     </div>
 
     <script type="text/javascript">
-        var showInfoFlashMessageButton = document.getElementById('show-info-flash-message');
-        showInfoFlashMessageButton.addEventListener('click', function() {
-            document.querySelector('b-flash-message[type=info]').show();
+        var showInfoFlashMessageButton = document.getElementById('show-message');
+        showInfoFlashMessageButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#myMessage').show();
         }, false);
 
-        var showSuccessFlashMessageButton = document.getElementById('show-success-flash-message');
-        showSuccessFlashMessageButton.addEventListener('click', function() {
-            document.querySelector('b-flash-message[type=success]').show();
-        }, false);
-
-        var showWarningFlashMessageButton = document.getElementById('show-warning-flash-message');
-        showWarningFlashMessageButton.addEventListener('click', function() {
-            document.querySelector('b-flash-message[type=warning]').show();
-        }, false);
-        
-        var showErrorFlashMessageButton = document.getElementById('show-error-flash-message');
-        showErrorFlashMessageButton.addEventListener('click', function() {
-            document.querySelector('b-flash-message[type=error]').show();
+        var reloadButton = document.getElementById('reload');
+        reloadButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            var messages = document.querySelectorAll('.flash-messages b-flash-message');
+            for (var index in messages) {
+                messages.item(index).show();
+            }
         }, false);
     </script>
 </body>

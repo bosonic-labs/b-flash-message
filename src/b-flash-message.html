@@ -6,27 +6,28 @@
             margin-bottom: 20px;
             border: 1px solid transparent;
             border-radius: 4px;
+            min-height: 19px;
         }
 
-        b-flash-message.success {
+        b-flash-message[type=success] {
             background-color: #dff0d8;
             border-color: #d6e9c6;
             color: #3c763d;
         }
 
-        b-flash-message.info {
+        b-flash-message[type=info] {
             background-color: #d9edf7;
             border-color: #bce8f1;
             color: #31708f;
         }
 
-        b-flash-message.warning {
+        b-flash-message[type=warning] {
             background-color: #fcf8e3;
             border-color: #faebcc;
             color: #8a6d3b;
         }
 
-        b-flash-message.error {
+        b-flash-message[type=error] {
             background-color: #f2dede;
             border-color: #ebccd1;
             color: #a94442;
@@ -36,10 +37,10 @@
             padding-right: 35px;
         }
 
-        b-flash-message .close{
+        .close{
             position: relative;
-            top: -23px;
-            right: -40px;
+            top: -2px;
+            right: -21px;
             color: inherit;
             float:right;
             font-size:21px;
@@ -67,24 +68,28 @@
                 var root = this.createShadowRoot();
                 root.appendChild(this.template.content.cloneNode(true));
 
-                var isCloseable = this.getAttribute('closeable') !== "false";
+                var isCloseable = this.getAttribute('closeable') === 'true';
                 var closeButton = root.querySelector('button.close');
 
                 if(isCloseable)
                     closeButton.addEventListener('click', this.close.bind(this));
-                else 
+                else
                     closeButton.remove();
-                
+
+                var type = this.getAttribute('type');
+                if(!type)
+                    this.setAttribute('type', 'info');
+
+                var isVisible = this.getAttribute('visible') === 'true';
+                if(isVisible)
+                    this.show();
             },
             show: function() {
-                this.setAttribute('visible', '');
-                this.classList.add(this.getAttribute('type'));
+                this.setAttribute('visible', 'true');
 
                 var duration = this.getAttribute('duration');
-
                 if(duration && !isNaN(parseInt(duration)))
                     setTimeout(this.close.bind(this), duration);
-                
             },
             close: function() {
                 this.removeAttribute('visible');
