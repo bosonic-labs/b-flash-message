@@ -33,34 +33,12 @@
             color: #a94442;
         }
 
-        b-flash-message .alert-closeable{
-            padding-right: 35px;
-        }
-
-        .close{
-            position: relative;
-            top: -2px;
-            right: -21px;
-            color: inherit;
-            float:right;
-            font-size:21px;
-            font-weight:700;
-            line-height:1;
-            color:#000;
-            text-shadow:0 1px 0 #fff;
-            opacity:.2;
-            filter:alpha(opacity=20);
-        }
-
         b-flash-message[visible] {
             display: block;
         }
     </style>
     <template>
-        <div class="b-flash-message alert-closeable">
-        	<button type="button" class="close">×</button>
-            <content></content>
-        </div>
+        <content></content>
     </template>
     <script>
         ({
@@ -68,20 +46,10 @@
                 var root = this.createShadowRoot();
                 root.appendChild(this.template.content.cloneNode(true));
 
-                var isCloseable = this.getAttribute('closeable') === 'true';
-                var closeButton = root.querySelector('button.close');
-
-                if(isCloseable)
-                    closeButton.addEventListener('click', this.close.bind(this));
-                else
-                    closeButton.remove();
-
                 var type = this.getAttribute('type');
-                if(!type)
-                    this.setAttribute('type', 'info');
+                this.setAttribute('type', type || 'info');
 
-                var isVisible = this.getAttribute('visible') === 'true';
-                if(isVisible)
+                if(this.getAttribute('visible') === 'true')
                     this.show();
             },
             show: function() {
@@ -95,7 +63,6 @@
             },
             close: function() {
                 this.removeAttribute('visible');
-
                 this.dispatchEvent(new Event('close'));
             }
         });

@@ -1,7 +1,18 @@
 # &lt;b-flash-message&gt;
 
-## Overview
-A flash message to display information with different levels.
+A [Bosonic](http://bosonic.github.io) flash message element with four different levels.
+
+[Check the demo](#). (coming soon)
+
+## Install
+
+This element is available as a npm package, see the [Bosonic documentation](http://bosonic.github.io/documentation.html) for Bosonic transpiler usage.
+
+```sh
+$ npm install --save b-flash-message
+```
+
+Otherwise, you can download and include in your HTML file the builded CSS & JS files, alongside with Bosonic runtime and polyfills, as described in the [Getting Started](http://bosonic.github.io/getting-started.html) guide.
 
 ## Usage
 
@@ -13,52 +24,18 @@ A flash message to display information with different levels.
 
 Will display a info flash message during 2 secs containing the string "Hello, World! Foo Bar".
 
-## Attributes
+## API
 
-### ___visible___
+### Attributes
+- __visible__: controls the display of the message. Valid values are `true` or `false`. By default it is set to `false`.
+- __closeable__: adds a button to let the user close the flash message. Valid values are `true` or `false`. By default it is set to `false`.
+- __type__: four possible values: `info`, `success`, `warning` and `error`, respectively blue, green, yellow and red. By default this attribute is set to `info`.
+-__duration__: Trigger a timeout when the message is displayed (see `show` accessor). Valid value is a number given in milliseconds.
 
-A boolean attribute that control the display of the message. Valid values are `true` or `false`. By default it is set to `false`.
+### Methods
+- __show()__: displays the flash message. If the attribute `duration` is set to a valid value, the message will be hidden automatically after specified number of milliseconds.
+- __close()__: hides the flash message.
 
-### ___closeable___
-
-A boolean attribute that adds (or not) a button to let the user closes the flash message. Valid values are `true` or `false`. By default it is set to `false`.
-
-### ___type___
-
-Lets you apply a theme to flash message. Four values are possible: `info`, `success`, `warning` and `error`, respectively blue, green, yellow and red. By default this attribute is set to `info`.
-
-### ___duration___
-
-Trigger a timeout when the message is displayed (see `show` accessor). Valid value is a number given in milliseconds. 
-
-## Methods
-
-### ___show___
-
-Displays the flash message.
-
-If the attribute `duration` is set to a valid value, the message will be hidden automatically after specified number of milliseconds.
-
-### ___close___
-
-Hides the flash message.
-
-## Events
-
-### ___show___
-
-Fired from the flash message element after it complete it is shown.
-
-### ___close___
-
-Fired from the flash message element after it complete it is closed.
-
-## Styling
-
-> More about style later. Stay tuned.
-
-## Misc
-
-### Customizing the flash message
-
-You can add any HTML code in the `<b-flash-message>` elements. You can control the display via css with the `visible` attribute or via javascript with `show()` / `close()` methods.
+### Events
+- __show__: will fire when the flash message is shown.
+- __close__: will fire when the flash message is closed.

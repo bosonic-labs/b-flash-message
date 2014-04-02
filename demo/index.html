@@ -7,17 +7,25 @@
     <script src="js/bosonic.js"></script>
     <script src="js/b-flash-message.js"></script>
     <link href="css/b-flash-message.css" rel="stylesheet">
+    <style>
+        .close{
+            float:right;
+            opacity:.4;
+            filter:alpha(opacity=40);
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
-    <b-flash-message visible="true" duration="5000">
+    <b-flash-message visible="true" duration="2000">
         <h1><strong>It's working!</strong></h1><p>Well done.</p>
     </b-flash-message>
 
     <h1>b-flash-message</h1>
     <div>
         <p>Display an info message that automatically disappears after 2 secs: <a href="#" id="show-message">show message</a></p>
-        <b-flash-message id="myMessage" type="info" closeable="true" duration="2000">
+        <b-flash-message id="myMessage" type="info" duration="2000">
             <strong>Hello, World!</strong> Foo Bar
         </b-flash-message>
     </div>
@@ -25,25 +33,34 @@
     <div>
         <p>Different levels of flash message are available: (<a href="#" id="reload">reload</a>)</p>
         <div class="flash-messages">
-            <b-flash-message type="success" closeable="true" visible="true">
+            <b-flash-message type="success" visible="true">
                 <strong>Congrats!</strong> Foo Bar
+                <button type="button" class="close">×</button>
             </b-flash-message>
 
-            <b-flash-message type="info" closeable="true" visible="true">
+            <b-flash-message type="info" visible="true">
                 <strong>Good to know!</strong> Foo Bar
+                <button type="button" class="close">×</button>
             </b-flash-message>
 
-            <b-flash-message type="warning" closeable="true" visible="true">
+            <b-flash-message type="warning" visible="true">
                 <strong>Oups!</strong> Foo Bar
+                <button type="button" class="close">×</button>
             </b-flash-message>
 
-            <b-flash-message type="error" closeable="true" visible="true">
+            <b-flash-message type="error" visible="true">
                 <strong>Fail!</strong> Foo Bar
+                <button type="button" class="close">×</button>
             </b-flash-message>
         </div>
     </div>
 
     <script type="text/javascript">
+    function logEvent(e) {
+        console.log('event `' + e.type + '` triggered: ', e);
+    }
+
+    window.addEventListener('WebComponentsReady', function() {
         var showInfoFlashMessageButton = document.getElementById('show-message');
         showInfoFlashMessageButton.addEventListener('click', function(e) {
             e.preventDefault();
@@ -61,9 +78,17 @@
 
         var messages = document.querySelectorAll('b-flash-message');
         for (var i = 0 ; i < messages.length ; i++) {
-            messages.item(i).addEventListener('show', function(e) {
-                console.log('event `show` triggered: ', e);
+            messages.item(i).addEventListener('show', logEvent);
+            messages.item(i).addEventListener('close', logEvent);
+        }
+
+        var closeButtons = document.querySelectorAll('b-flash-message .close');
+        for (var i = 0 ; i < closeButtons.length ; i++) {
+            closeButtons.item(i).addEventListener('click', function(e) {
+                e.preventDefault();
+                e.target.parentNode.close();
             });
         }
+    });
     </script>
 </body>
