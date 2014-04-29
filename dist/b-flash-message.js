@@ -11,6 +11,11 @@
                     this.setAttribute('type', type || 'info');
                     if (this.getAttribute('visible') === 'true')
                         this.show();
+                    if (this.supportsTransitions()) {
+                        this.fadeOutEndListener = this.fadeOutEnd.bind(this);
+                        this.addEventListener('webkitTransitionEnd', this.fadeOutEndListener);
+                        this.addEventListener('transitionend', this.fadeOutEndListener);
+                    }
                 }
             },
             show: {
@@ -18,8 +23,13 @@
                 value: function () {
                     this.setAttribute('visible', 'true');
                     var duration = this.getAttribute('duration');
-                    if (duration && !isNaN(parseInt(duration)))
-                        setTimeout(this.close.bind(this), duration);
+                    if (duration && !isNaN(parseInt(duration))) {
+                        if (this.supportsTransitions()) {
+                            setTimeout(this.fadeOut.bind(this), duration);
+                        } else {
+                            setTimeout(this.close.bind(this), duration);
+                        }
+                    }
                     this.dispatchEvent(new CustomEvent('b-flash-message-show'));
                 }
             },
@@ -28,6 +38,34 @@
                 value: function () {
                     this.removeAttribute('visible');
                     this.dispatchEvent(new CustomEvent('b-flash-message-close'));
+                }
+            },
+            fadeOut: {
+                enumerable: true,
+                value: function (duration) {
+                    this.setOpacity(0, 0.5);
+                }
+            },
+            fadeOutEnd: {
+                enumerable: true,
+                value: function (e) {
+                    console.log(e);
+                    this.close();
+                    this.setOpacity(1);
+                }
+            },
+            setOpacity: {
+                enumerable: true,
+                value: function (opacity, transitionDuration) {
+                    var s = this.style;
+                    s.webkitTransition = s.transition = transitionDuration ? 'opacity ' + transitionDuration + 's ease-in-out' : null;
+                    s.opacity = opacity;
+                }
+            },
+            supportsTransitions: {
+                enumerable: true,
+                value: function () {
+                    return window.requestAnimationFrame !== undefined;
                 }
             }
         });

@@ -1,12 +1,12 @@
 <element name="b-flash-message">
     <style>
         :host {
-            display: none;
             padding: 15px;
             margin-bottom: 20px;
             border: 1px solid transparent;
             border-radius: 4px;
             min-height: 19px;
+            display: none;
         }
 
         :host[type=success] {
@@ -60,21 +60,53 @@
                 var type = this.getAttribute('type');
                 this.setAttribute('type', type || 'info');
 
-                if(this.getAttribute('visible') === 'true')
-                    this.show();
+                if (this.getAttribute('visible') === 'true') this.show();
+
+                if (this.supportsTransitions()) {
+                    this.fadeOutEndListener = this.fadeOutEnd.bind(this);
+                    this.addEventListener('webkitTransitionEnd', this.fadeOutEndListener);
+                    this.addEventListener('transitionend', this.fadeOutEndListener);
+                }
             },
+
             show: function() {
                 this.setAttribute('visible', 'true');
 
                 var duration = this.getAttribute('duration');
-                if(duration && !isNaN(parseInt(duration)))
-                    setTimeout(this.close.bind(this), duration);
+                if (duration && !isNaN(parseInt(duration))) {
+                    if (this.supportsTransitions()) {
+                        setTimeout(this.fadeOut.bind(this), duration);
+                    } else {
+                        setTimeout(this.close.bind(this), duration);
+                    }
+                }
 
                 this.dispatchEvent(new CustomEvent('b-flash-message-show'));
             },
+
             close: function() {
                 this.removeAttribute('visible');
                 this.dispatchEvent(new CustomEvent('b-flash-message-close'));
+            },
+
+            fadeOut: function(duration) {
+                this.setOpacity(0, 0.5);
+            },
+
+            fadeOutEnd: function(e) {
+                console.log(e);
+                this.close();
+                this.setOpacity(1);
+            },
+
+            setOpacity: function(opacity, transitionDuration) {
+                var s = this.style;
+                s.webkitTransition = s.transition = transitionDuration ? 'opacity ' + transitionDuration + 's ease-in-out' : null;
+                s.opacity = opacity;
+            },
+
+            supportsTransitions: function() {
+                return window.requestAnimationFrame !== undefined;
             }
         });
     </script>
