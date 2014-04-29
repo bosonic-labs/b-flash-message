@@ -1,6 +1,6 @@
 <element name="b-flash-message">
     <style>
-        b-flash-message {
+        :host {
             display: none;
             padding: 15px;
             margin-bottom: 20px;
@@ -9,42 +9,53 @@
             min-height: 19px;
         }
 
-        b-flash-message[type=success] {
+        :host[type=success] {
             background-color: #dff0d8;
             border-color: #d6e9c6;
             color: #3c763d;
         }
 
-        b-flash-message[type=info] {
+        :host[type=info] {
             background-color: #d9edf7;
             border-color: #bce8f1;
             color: #31708f;
         }
 
-        b-flash-message[type=warning] {
+        :host[type=warning] {
             background-color: #fcf8e3;
             border-color: #faebcc;
             color: #8a6d3b;
         }
 
-        b-flash-message[type=error] {
+        :host[type=error] {
             background-color: #f2dede;
             border-color: #ebccd1;
             color: #a94442;
         }
 
-        b-flash-message[visible] {
+        :host[visible] {
             display: block;
         }
     </style>
     <template>
-        <content></content>
+        <style>
+            .b-flash-message-close {
+                float:right;
+                opacity:.4;
+                filter:alpha(opacity=40);
+                cursor: pointer;
+            }
+        </style>
+        <button class="b-flash-message-close">×</button>
     </template>
     <script>
         ({
-            readyCallback: function() {
-                var root = this.createShadowRoot();
-                root.appendChild(this.template.content.cloneNode(true));
+            createdCallback: function() {
+                if (this.getAttribute('closeable') === 'true') {
+                    this.appendChild(this.template.content.cloneNode(true));
+                    this.querySelector('.b-flash-message-close')
+                        .addEventListener('click', this.close.bind(this), false);
+                }
 
                 var type = this.getAttribute('type');
                 this.setAttribute('type', type || 'info');
@@ -59,11 +70,11 @@
                 if(duration && !isNaN(parseInt(duration)))
                     setTimeout(this.close.bind(this), duration);
 
-                this.dispatchEvent(new Event('show'));
+                this.dispatchEvent(new CustomEvent('b-flash-message-show'));
             },
             close: function() {
                 this.removeAttribute('visible');
-                this.dispatchEvent(new Event('close'));
+                this.dispatchEvent(new CustomEvent('b-flash-message-close'));
             }
         });
     </script>

@@ -37,5 +37,5 @@ Will display a info flash message during 2 secs containing the string "Hello, Wo
 - __close()__: hides the flash message.
 
 ### Events
-- __show__: will fire when the flash message is shown.
-- __close__: will fire when the flash message is closed.
+- __b-flash-message-show__: will fire when the flash message is shown.
+- __b-flash-message-close__: will fire when the flash message is closed.

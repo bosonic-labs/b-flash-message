@@ -4,7 +4,6 @@
     <title>Demo</title>
     <meta charset="utf-8">
     <script src="js/bosonic-polyfills.js"></script>
-    <script src="js/bosonic.js"></script>
     <script src="js/b-flash-message.js"></script>
     <link href="css/b-flash-message.css" rel="stylesheet">
     <style>
@@ -18,10 +17,6 @@
 </head>
 <body>
 
-    <b-flash-message visible="true" duration="2000">
-        <h1><strong>It's working!</strong></h1><p>Well done.</p>
-    </b-flash-message>
-
     <h1>b-flash-message</h1>
     <div>
         <p>Display an info message that automatically disappears after 2 secs: <a href="#" id="show-message">show message</a></p>
@@ -33,24 +28,20 @@
     <div>
         <p>Different levels of flash message are available: (<a href="#" id="reload">reload</a>)</p>
         <div class="flash-messages">
-            <b-flash-message type="success" visible="true">
+            <b-flash-message type="success" visible="true" closeable="true">
                 <strong>Congrats!</strong> Foo Bar
-                <button type="button" class="close">×</button>
             </b-flash-message>
 
-            <b-flash-message type="info" visible="true">
+            <b-flash-message type="info" visible="true" closeable="true">
                 <strong>Good to know!</strong> Foo Bar
-                <button type="button" class="close">×</button>
             </b-flash-message>
 
-            <b-flash-message type="warning" visible="true">
+            <b-flash-message type="warning" visible="true" closeable="true">
                 <strong>Oups!</strong> Foo Bar
-                <button type="button" class="close">×</button>
             </b-flash-message>
 
-            <b-flash-message type="error" visible="true">
+            <b-flash-message type="error" visible="true" closeable="true">
                 <strong>Fail!</strong> Foo Bar
-                <button type="button" class="close">×</button>
             </b-flash-message>
         </div>
     </div>
@@ -78,16 +69,8 @@
 
         var messages = document.querySelectorAll('b-flash-message');
         for (var i = 0 ; i < messages.length ; i++) {
-            messages.item(i).addEventListener('show', logEvent);
-            messages.item(i).addEventListener('close', logEvent);
-        }
-
-        var closeButtons = document.querySelectorAll('b-flash-message .close');
-        for (var i = 0 ; i < closeButtons.length ; i++) {
-            closeButtons.item(i).addEventListener('click', function(e) {
-                e.preventDefault();
-                e.target.parentNode.close();
-            });
+            messages.item(i).addEventListener('b-flash-message-show', logEvent);
+            messages.item(i).addEventListener('b-flash-message-close', logEvent);
         }
     });
     </script>
