@@ -5,6 +5,7 @@ b-flash-message {
   border-radius: 4px;
   min-height: 19px;
   display: none;
+  opacity: 1;
 }
 
 b-flash-message[type=success] {
@@ -33,4 +34,9 @@ b-flash-message[type=error] {
 
 b-flash-message[visible] {
   display: block;
+}
+
+b-flash-message[visible][fadeOut] {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }
