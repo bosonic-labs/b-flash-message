@@ -49,7 +49,6 @@
             fadeOutEnd: {
                 enumerable: true,
                 value: function (e) {
-                    console.log(e);
                     this.close();
                     this.setOpacity(1);
                 }
