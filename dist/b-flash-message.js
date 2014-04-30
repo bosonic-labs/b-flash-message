@@ -25,6 +25,7 @@
                     var duration = this.getAttribute('duration');
                     if (duration && !isNaN(parseInt(duration))) {
                         if (this.supportsTransitions()) {
+                            this.removeAttribute('fadeOut');
                             setTimeout(this.fadeOut.bind(this), duration);
                         } else {
                             setTimeout(this.close.bind(this), duration);
@@ -43,22 +44,14 @@
             fadeOut: {
                 enumerable: true,
                 value: function (duration) {
-                    this.setOpacity(0, 0.5);
+                    this.setAttribute('fadeOut', '');
                 }
             },
             fadeOutEnd: {
                 enumerable: true,
                 value: function (e) {
                     this.close();
-                    this.setOpacity(1);
-                }
-            },
-            setOpacity: {
-                enumerable: true,
-                value: function (opacity, transitionDuration) {
-                    var s = this.style;
-                    s.webkitTransition = s.transition = transitionDuration ? 'opacity ' + transitionDuration + 's ease-in-out' : null;
-                    s.opacity = opacity;
+                    this.removeAttribute('fadeOut');
                 }
             },
             supportsTransitions: {
