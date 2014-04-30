@@ -25,7 +25,7 @@
                     var duration = this.getAttribute('duration');
                     if (duration && !isNaN(parseInt(duration))) {
                         if (this.supportsTransitions()) {
-                            this.removeAttribute('fadeOut');
+                            this.removeAttribute('closing');
                             setTimeout(this.fadeOut.bind(this), duration);
                         } else {
                             setTimeout(this.close.bind(this), duration);
@@ -44,14 +44,14 @@
             fadeOut: {
                 enumerable: true,
                 value: function (duration) {
-                    this.setAttribute('fadeOut', '');
+                    this.setAttribute('closing', '');
                 }
             },
             fadeOutEnd: {
                 enumerable: true,
                 value: function (e) {
                     this.close();
-                    this.removeAttribute('fadeOut');
+                    this.removeAttribute('closing');
                 }
             },
             supportsTransitions: {

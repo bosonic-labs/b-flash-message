@@ -38,7 +38,7 @@
             display: block;
         }
 
-        :host[visible][fadeOut] {
+        :host[visible][closing] {
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
         }
@@ -81,7 +81,7 @@
                 var duration = this.getAttribute('duration');
                 if (duration && !isNaN(parseInt(duration))) {
                     if (this.supportsTransitions()) {
-                        this.removeAttribute('fadeOut');
+                        this.removeAttribute('closing');
                         setTimeout(this.fadeOut.bind(this), duration);
                     } else {
                         setTimeout(this.close.bind(this), duration);
@@ -97,12 +97,12 @@
             },
 
             fadeOut: function(duration) {
-                this.setAttribute('fadeOut', '');
+                this.setAttribute('closing', '');
             },
 
             fadeOutEnd: function(e) {
                 this.close();
-                this.removeAttribute('fadeOut');
+                this.removeAttribute('closing');
             },
 
             supportsTransitions: function() {
